@@ -1,0 +1,229 @@
+@font-face {
+  font-family: creepy;
+  src: url(./assets/Herculanum.ttf);
+}
+
+* {
+  --primary-color: rgba(0, 0, 0, 0);
+}
+html,
+body {
+  height: 100%;
+  background-color: #02001a;
+  margin: 0;
+  padding: 0;
+  scroll-snap-type: y mandatory;
+  scroll-snap-stop: always;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#left-eye,
+#right-eye,
+#nose,
+#mouth {
+  fill: #02001a;
+}
+#outline {
+  fill: rgba(255, 255, 255, 0.24);
+}
+#centered {
+  position: fixed;
+  padding: 30px;
+  z-index: 5;
+}
+#centered.out{pointer-events: none;}
+#pumpkinContainer {
+  transition: scale 2s, opacity 600ms 100ms;
+  scale: 1;
+  opacity: 1;
+  cursor: pointer;
+}
+#centered.out #pumpkinContainer{
+  scale: 50;
+  opacity: 0;
+  pointer-events: none;
+}
+#pumpkinContainer:hover {
+  scale: 1.1;
+}
+.center {
+  text-align: center;
+}
+.themed-text {
+  font-family: creepy, serif;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+}
+.blinktext {
+  animation: 3s ease-in-out infinite blink;
+}
+#centered.out .blinktext {
+  animation: none;
+  opacity: 0;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#invite {
+  opacity: 0;
+  transition: opacity 500ms;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+#invite section {
+  scroll-snap-align: start;
+}
+#invite.in {
+  opacity: 1;
+}
+#cta {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+}
+#cta > div {
+  margin-top: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+#invite.in #cta > div {
+  animation: zoomIn 1s both;
+  z-index: 5;
+}
+#cta img::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  outline: 3px solid red;
+}
+#background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 4s;
+  object-fit: cover;
+}
+#scroll-indicator {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(2,1,26,1) 00%, rgba(2,1,26,0) 100%);
+}
+#scroll-indicator > svg {animation: nudge 3s infinite;}
+#invite.in #background {
+  opacity: 0.5;
+}
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    scale: 0.6;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes nudge {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+#main {
+    width: 100%;
+    height: 1350px;
+    background-image: url(./assets/Background-shapes.png);
+    background-repeat: no-repeat;
+}
+
+.bigbutton{
+    border: none;
+    display: block;
+    width: 170px;
+    height: 170px;
+    padding: 50px;
+    border-radius: 25px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+.bigbutton:active{
+  outline: 1px solid white;
+}
+.tgl-btn{width: 170px; height: 170px;border-radius: 25px;}
+.tgl-skewed + .tgl-btn {
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+.tgl-skewed + .tgl-btn:after, .tgl-skewed + .tgl-btn:before {
+  position: absolute;
+  display: inline-block;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  line-height: 2em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.tgl-skewed + .tgl-btn:after {
+  left: 100%;
+  top: 40%;
+  white-space: pre;
+  content:"77 crehore Dr. \A wear a costume!";
+}
+.tgl-skewed + .tgl-btn:before {
+  left: 0;
+  top: 40%;
+  content: "I'm in";
+}
+.tgl-skewed + .tgl-btn:active {
+  outline: 3px solid white
+}
+.tgl-skewed + .tgl-btn:active:before {
+  left: -10%;
+}
+.tgl-skewed:checked + .tgl-btn {
+  outline: 3px solid white;
+}
+.tgl-skewed:checked + .tgl-btn:before {
+  left: -100%;
+}
+.tgl-skewed:checked + .tgl-btn:after {
+  left: 0;
+}
+.tgl-skewed:checked + .tgl-btn:active:after {
+  left: 10%;
+}
