@@ -1,18 +1,17 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-export default async function handler(request, response) {
+export default function handler(request, response) {
     if(request.query.rsvp) {
-        await prisma.invitee.update({
+        prisma.invitee.update({
             where: {name: request.query.n},
             data: {RSVP: request.query.rsvp === "true" }
         });
-    
         response.status(200).json({
           status: "success"
         });
     }else if(request.query.n){
-        await prisma.invitee.upsert({
+        prisma.invitee.upsert({
             where: {name: request.query.n},
             create: {
                 name: request.query.n,
@@ -23,5 +22,8 @@ export default async function handler(request, response) {
                 opened: new Date()
             }
         });
+        response.status(200).json({
+            status: "success"
+        })
     }
   } 
