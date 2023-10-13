@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/Superdeveloper-rgb/halloween-event/issues"
   },
-  "homepage": "https://github.com/Superdeveloper-rgb/halloween-event#readme"
+  "homepage": "https://github.com/Superdeveloper-rgb/halloween-event#readme",
+  "dependencies": {
+    "@prisma/client": "^5.4.2",
+    "vercel": "^32.4.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.4.2"
+  }
 }
