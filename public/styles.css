@@ -181,7 +181,7 @@ h1, p {margin: 10px 0; max-width: 200px;}
     background-repeat: no-repeat;
     overflow-x: hidden;
 }
-
+li {margin-bottom: 10px;}
 .bigbutton{
     border: none;
     display: block;

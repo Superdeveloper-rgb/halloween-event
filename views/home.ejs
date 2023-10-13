@@ -138,6 +138,21 @@
           <input type="checkbox" id="cb4" style="display: none;" <%if(!RSVP){%>checked<%}%> />
           <label class="bigbutton themed-text" type="button" for="cb4"></label>
         </div>
+        <div style="position: absolute;top: 980px;width: 100%;" class="themed-text">
+            <h1 style="text-align: center; max-width: 100%;">Info:</h1>
+            <ul style="max-width: 300px;margin: auto;">
+                <li>Venue: Matt's Nightclub</li>
+                <li>Time: 7pm-9pm (my neighbors have young kids)</li>
+                <li>Adress: 77 Crehore Dr. Newton, MA 02462</li>
+                <li>Policies: BYOA, No Smoking/substances</li>
+                <li>Dress Code: Wear a costume! (but something you can dance in ;)</li>
+                <li>Expect Karaoke, games, and spooky vibes</li>
+            </ul>
+            <br>
+            <br>
+            <p style="max-width: 100%; text-align: center;">You may bring a "plus one," invite them with this link:</p>
+            <p style="max-width: 100%; text-align: center;" id="guestlink"></p>
+        </div>
 
         <!-- background shapes -->
         <svg
@@ -205,6 +220,7 @@
     <script>
       const params = new URLSearchParams(window.location.search);
       document.addEventListener("click", openinvite);
+      document.getElementById('guestlink').innerText = `https://malloween.vercel.app/?n=${encodeURIComponent(params.get('n')+"'s guest")}`;
       function openinvite() {
         window.scrollTo(0, 0);
         document.getElementById("centered").classList.add("out");
