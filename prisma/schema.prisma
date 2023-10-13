@@ -10,3 +10,11 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model invitee {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique
+  scanned DateTime?
+  opened  DateTime?
+  RSVP    Boolean?
+}
