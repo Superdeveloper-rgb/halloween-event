@@ -225,6 +225,16 @@
         document.getElementById("centered").classList.add("out");
         document.getElementById("invite").classList.add("in");
         document.removeEventListener("click", openinvite);
+
+        function reqListener() {
+        console.log(this.responseText);
+        }
+
+
+        const req = new XMLHttpRequest();
+        req.addEventListener("load", reqListener);
+        req.open("GET", `${window.location.origin}/api/rsvp?n=${params.get('n')}`);
+        req.send();
       }
       document.getElementById("cb3").addEventListener("change", ()=>document.getElementById('cb3').checked && updateRSVP("true"));
       document.getElementById("cb4").addEventListener("change", ()=>document.getElementById('cb4').checked && updateRSVP("false"));

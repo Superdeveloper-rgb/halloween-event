@@ -1,15 +1,16 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+const { PrismaClient } = require('@prisma/client')
 
 export default function handler(request, response) {
-    if(request.query.rsvp) {
+    const prisma = new PrismaClient();
+    if(request.query.rsvp && request.query.n) {
         prisma.invitee.update({
             where: {name: request.query.n},
             data: {RSVP: request.query.rsvp === "true" }
-        });
-        response.status(200).json({
-          status: "success"
-        });
+        }).then(()=>{
+            response.status(200).json({
+              status: "success"
+            })
+        })
     }else if(request.query.n){
         prisma.invitee.upsert({
             where: {name: request.query.n},
@@ -21,9 +22,13 @@ export default function handler(request, response) {
             update: {
                 opened: new Date()
             }
-        });
-        response.status(200).json({
-            status: "success"
+        }).then(()=>{
+            response.status(200).json({
+                status: "success"
+            })
         })
+    }else{
+        console.log("error");
+        response.status(501);
     }
   } 
