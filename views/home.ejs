@@ -132,11 +132,11 @@
             id="cb3"
             type="checkbox"
             style="display: none"
+            <%if(RSVP){%>checked<%}%>
           />
           <label class="tgl-btn themed-text" for="cb3"></label>
-          <button class="bigbutton themed-text" type="button">
-            not for me
-          </button>
+          <input type="checkbox" id="cb4" style="display: none;" <%if(!RSVP){%>checked<%}%> />
+          <label class="bigbutton themed-text" type="button" for="cb4"></label>
         </div>
 
         <!-- background shapes -->
@@ -211,15 +211,18 @@
         document.getElementById("invite").classList.add("in");
         document.removeEventListener("click", openinvite);
       }
-      document.getElementById("cb3").addEventListener("change", updateRSVP);
-      function updateRSVP() {
+      document.getElementById("cb3").addEventListener("change", ()=>document.getElementById('cb3').checked && updateRSVP("true"));
+      document.getElementById("cb4").addEventListener("change", ()=>document.getElementById('cb4').checked && updateRSVP("false"));
+      function updateRSVP(rsvp) {
         function reqListener() {
           console.log(this.responseText);
         }
+        document.getElementById('cb4').checked = (rsvp === "false" ? true : false)
+        document.getElementById('cb3').checked = (rsvp === "true" ? true : false)
 
         const req = new XMLHttpRequest();
         req.addEventListener("load", reqListener);
-        req.open("GET", `${window.location.origin}/rsvp?n=${params.get('n')}&rsvp=${document.getElementById('cb3').checked}`);
+        req.open("GET", `${window.location.origin}/rsvp?n=${params.get('n')}&rsvp=${rsvp}`);
         req.send();
       }
     </script>

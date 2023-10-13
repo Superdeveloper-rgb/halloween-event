@@ -20,7 +20,8 @@ app.get('/', async (req, res) => {
             opened: new Date()
         }
     });
-    res.render('home', { name });
+    const {RSVP} = await prisma.invitee.findUnique({where: {name: req.query.n}, select: {RSVP: true}})
+    res.render('home', { name, RSVP });
   });
 
 app.get('/rsvp', async (req, res)=>{
