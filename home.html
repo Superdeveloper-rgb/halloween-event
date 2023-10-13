@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🎃</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="./public/styles.css" />
   </head>
   <body>
     <div id="centered">
@@ -54,9 +54,8 @@
     <article id="invite">
       <section id="cta">
         <div>
-          <img src="/jackolantern.png" width="102px" height="93px" />
+          <img src="./public/jackolantern.png" width="102px" height="93px" />
           <h1 id="name" class="themed-text center" style="font-size: 20px">
-            <%=name%>
           </h1>
           <p
             class="themed-text center"
@@ -101,7 +100,7 @@
             </g>
           </svg>
         </div>
-        <img src="/background.png" id="background" />
+        <img src="./public/background.png" id="background" />
       </section>
       <section id="main" style="position: relative">
         <div style="position: relative; top: 380px">
@@ -132,13 +131,12 @@
             id="cb3"
             type="checkbox"
             style="display: none"
-            <%if(RSVP){%>checked<%}%>
           />
           <label class="tgl-btn themed-text" for="cb3"></label>
-          <input type="checkbox" id="cb4" style="display: none;" <%if(!RSVP){%>checked<%}%> />
+          <input type="checkbox" id="cb4" style="display: none;" />
           <label class="bigbutton themed-text" type="button" for="cb4"></label>
         </div>
-        <div style="position: absolute;top: 980px;width: 100%;" class="themed-text">
+        <div style="position: absolute;top: 980px;width: 100%;" id="" class="themed-text">
             <h1 style="text-align: center; max-width: 100%;">Info:</h1>
             <ul style="max-width: 300px;margin: auto;">
                 <li>Venue: Matt's Nightclub</li>
@@ -221,6 +219,7 @@
       const params = new URLSearchParams(window.location.search);
       document.addEventListener("click", openinvite);
       document.getElementById('guestlink').innerText = `https://malloween.vercel.app/?n=${encodeURIComponent(params.get('n')+"'s guest")}`;
+      document.getElementById('name').innerText = params.get('n');
       function openinvite() {
         window.scrollTo(0, 0);
         document.getElementById("centered").classList.add("out");
